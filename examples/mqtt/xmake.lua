@@ -3,12 +3,12 @@
 
 -- Update this to point to the location of the CHERIoT SDK
 sdkdir = os.getenv("CHERIOT_SDK") or
-    "../../../rtos-source/sdk/"
+    "../../rtos-source/sdk/"
 includes(sdkdir)
 set_toolchains("cheriot-clang")
 
 networkstackdir = os.getenv("CHERIOT_NETWORK") or
-    "../../../network-stack/"
+    "../../network-stack/"
 includes(path.join(networkstackdir,"lib"))
 
 set_project("CHERIoT MQTT Example")

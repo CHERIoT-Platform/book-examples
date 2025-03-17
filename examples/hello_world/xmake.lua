@@ -5,7 +5,7 @@
 set_project("CHERIoT example")
 
 sdkdir = os.getenv("CHERIOT_SDK") or
-	"../../../rtos-source/sdk/"
+	"../../rtos-source/sdk/"
 includes(sdkdir)
 
 set_toolchains("cheriot-clang")
