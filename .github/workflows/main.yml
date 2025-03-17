@@ -1,0 +1,55 @@
+name: Book examples
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  check-format:
+    name: Check coding conventions
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/cheriot-platform/devcontainer:latest
+      options: --user 1001
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Generate compiler_commands.json files
+      run: ./scripts/generate_compile_commands.sh
+    - name: Run clang-format
+      run: ./scripts/run_clang_format.sh /cheriot-tools/bin
+
+  build-examples:
+    name: Build examples
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/cheriot-platform/devcontainer:latest
+      options: --user 1001
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Build examples
+      run: |
+        set -e
+        for example_dir in $PWD/examples/*/; do
+          if [ -f $example_dir/xmake.lua ] ; then
+            cd $example_dir
+            echo Building $example_dir
+            xmake f --sdk=/cheriot-tools/
+            xmake
+          fi
+        done
+
+  all-checks:
+    needs: [build-examples, check-format]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dummy step
+      run: true
