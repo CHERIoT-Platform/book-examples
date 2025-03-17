@@ -1,5 +1,5 @@
 [submodule "rtos-source"]
-	path = rtos-source
+	path = cheriot-rtos
 	url = https://github.com/CHERIoT-Platform/cheriot-rtos.git
 [submodule "network-stack"]
 	path = network-stack

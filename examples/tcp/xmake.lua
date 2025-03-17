@@ -3,7 +3,7 @@
 
 -- Update this to point to the location of the CHERIoT SDK
 sdkdir = os.getenv("CHERIOT_SDK") or
-    "../../rtos-source/sdk/"
+    "../../cheriot-rtos/sdk/"
 includes(sdkdir)
 set_toolchains("cheriot-clang")
 

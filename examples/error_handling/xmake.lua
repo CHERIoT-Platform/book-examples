@@ -2,7 +2,7 @@
 -- SPDX-License-Identifier: MIT
 
 set_project("CHERIoT Error Handling")
-sdkdir = os.getenv("CHERIOT_SDK") or "../../rtos-source/sdk/"
+sdkdir = os.getenv("CHERIOT_SDK") or "../../cheriot-rtos/sdk/"
 includes(sdkdir)
 set_toolchains("cheriot-clang")
 
