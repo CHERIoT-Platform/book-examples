@@ -13,7 +13,6 @@ __cheriot_compartment(
 // compartment_export#end
 
 // compartment_export_callback#begin
-
 /**
  * A cross-compartment callback that takes an integer and
  * returns an integer.
