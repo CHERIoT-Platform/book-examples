@@ -3,6 +3,7 @@
 
 #include <debug.hh>
 #include <fail-simulator-on-error.h>
+#include <futex.h>
 #include <queue.h>
 #include <timeout.hh>
 #include <token.h>
