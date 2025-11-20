@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "hello.h"
+#include <allocator.h>
 #include <debug.hh>
 #include <futex.h>
 #include <locks.hh>
