@@ -44,11 +44,11 @@ void __cheriot_compartment("https_example") example()
 	// tls_connect#begin
 	Timeout unlimited{UnlimitedTimeout};
 	auto    tlsSocket = tls_connection_create(
-    &unlimited,
-    TEST_MALLOC,
-    STATIC_SEALED_VALUE(ExampleComTLS),
-    TAs,
-    TAs_NUM);
+	  &unlimited,
+	  TEST_MALLOC,
+	  STATIC_SEALED_VALUE(ExampleComTLS),
+	  TAs,
+	  TAs_NUM);
 	if (!CHERI::Capability{tlsSocket}.is_valid())
 	{
 		Debug::log("Failed to connect.  Error: {}",
@@ -58,13 +58,13 @@ void __cheriot_compartment("https_example") example()
 	// tls_connect#end
 	Debug::log("TLS socket: {}", tlsSocket);
 
-	static char      message[] = "GET / HTTP/1.1\r\n"
-	                             "Host: example.com\r\n"
-	                             "User-Agent: cheriot-demo\r\n"
-	                             "Accept: */*\r\n"
-	                             "\r\n";
-	constexpr size_t toSend    = sizeof(message) - 1;
-	size_t           sent      = 0;
+	static char message[]   = "GET / HTTP/1.1\r\n"
+	                          "Host: example.com\r\n"
+	                          "User-Agent: cheriot-demo\r\n"
+	                          "Accept: */*\r\n"
+	                          "\r\n";
+	constexpr size_t toSend = sizeof(message) - 1;
+	size_t           sent   = 0;
 	// send#begin
 	while (sent < toSend)
 	{

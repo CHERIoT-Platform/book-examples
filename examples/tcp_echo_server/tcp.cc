@@ -74,9 +74,9 @@ void __cheriot_compartment("tcp_example") example()
 	// listen#begin
 	Timeout unlimited{UnlimitedTimeout};
 	auto    socket = network_socket_listen_tcp(
-    &unlimited,
-    MALLOC_CAPABILITY,
-    STATIC_SEALED_VALUE(ServerPort));
+	  &unlimited,
+	  MALLOC_CAPABILITY,
+	  STATIC_SEALED_VALUE(ServerPort));
 	if (!CHERI::Capability{socket}.is_valid())
 	{
 		Debug::log("Failed to bind to local port");

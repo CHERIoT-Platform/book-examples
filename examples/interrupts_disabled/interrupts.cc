@@ -37,7 +37,9 @@ spin_for_ticks(uint32_t ticks)
 {
 	uint64_t end =
 	  rdcycle64() + (uint64_t(ticks) * TIMERCYCLES_PER_TICK);
-	while (rdcycle64() < end) {}
+	while (rdcycle64() < end)
+	{
+	}
 }
 
 /// Low-priority thread entry point.
