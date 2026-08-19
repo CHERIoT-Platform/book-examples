@@ -5,7 +5,7 @@ using Debug = ConditionalDebug<true, "Clocks Example">;
 
 void __cheriot_compartment("clocks") entry()
 {
-	// gettime-begin
+	// gettime#begin
 	timespec ts;
 	clock_gettime(CLOCK_MONOTONIC, &ts);
 	Debug::log("Monotonic time: {} seconds, {} nanoseconds",
@@ -19,5 +19,5 @@ void __cheriot_compartment("clocks") entry()
 	Debug::log("Thread CPU time: {} seconds, {} nanoseconds",
 	           ts.tv_sec,
 	           static_cast<int>(ts.tv_nsec));
-	// gettime-end
+	// gettime#end
 }
