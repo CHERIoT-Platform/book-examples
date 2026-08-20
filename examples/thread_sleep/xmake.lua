@@ -10,7 +10,7 @@ includes(sdkdir)
 set_toolchains("cheriot-clang")
 
 option("board")
-	set_default("sail")
+	set_default("ibex-safe-simulator")
 
 -- An single compartment for this example.
 compartment("current")
