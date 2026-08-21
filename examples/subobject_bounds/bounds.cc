@@ -25,12 +25,12 @@ void print_capability(void *ptr)
 	  (permissions & CHERI_PERM_USER0) ? '0' : '-');
 }
 
-// point#begin
+// point_definition#begin
 struct  Point
 {
 	int x, y;
 };
-// point#end
+// point_definition#end
 
 // point_list#begin
 struct IntrusiveLinkedList
