@@ -14,7 +14,8 @@ using Debug = ConditionalDebug<true, "TCP Server Example">;
 void debug_network_address(uintptr_t    value,
                            DebugWriter &writer)
 {
-	auto *address = reinterpret_cast<NetworkAddress *>(value);
+	auto *address =
+	  reinterpret_cast<NetworkAddress *>(value);
 	if (address->kind == NetworkAddress::AddressKindIPv6)
 	{
 		for (int i = 0; i < 14; i += 2)
@@ -26,7 +27,8 @@ void debug_network_address(uintptr_t    value,
 		writer.write_hex_byte(address->ipv6[14]);
 		writer.write_hex_byte(address->ipv6[15]);
 	}
-	else if (address->kind == NetworkAddress::AddressKindIPv4)
+	else if (address->kind ==
+	         NetworkAddress::AddressKindIPv4)
 	{
 		writer.write_decimal((address->ipv4 >> 0) & 0xff);
 		writer.write('.');
@@ -92,10 +94,10 @@ void __cheriot_compartment("tcp_example") example()
 		uint16_t       port;
 		auto           accepted =
 		  network_socket_accept_tcp(&unlimited,
-		                            MALLOC_CAPABILITY,
-		                            socket,
-		                            &address,
-		                            &port);
+			                          MALLOC_CAPABILITY,
+			                          socket,
+			                          &address,
+			                          &port);
 		if (!CHERI::Capability{accepted}.is_valid())
 		{
 			continue;

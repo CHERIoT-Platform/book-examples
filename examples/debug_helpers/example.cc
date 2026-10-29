@@ -34,7 +34,8 @@ struct NetworkAddress
 void debug_network_address(uintptr_t    value,
                            DebugWriter &writer)
 {
-	auto *address = reinterpret_cast<NetworkAddress *>(value);
+	auto *address =
+	  reinterpret_cast<NetworkAddress *>(value);
 	if (address->kind == NetworkAddress::AddressKindIPv6)
 	{
 		for (int i = 0; i < 14; i += 2)
@@ -46,7 +47,8 @@ void debug_network_address(uintptr_t    value,
 		writer.write_hex_byte(address->ipv6[14]);
 		writer.write_hex_byte(address->ipv6[15]);
 	}
-	else if (address->kind == NetworkAddress::AddressKindIPv4)
+	else if (address->kind ==
+	         NetworkAddress::AddressKindIPv4)
 	{
 		writer.write_decimal((address->ipv4 >> 0) & 0xff);
 		writer.write('.');
@@ -86,12 +88,13 @@ __cheriot_compartment("debug_compartment") int entry()
 {
 	// builtin_log#begin
 	Debug::log("Hello world!");
-	Debug::log("Here is a C string {}, A C++ string view {}, "
-	           "an int {}, and an unsigned 64-bit value {}",
-	           "hello from a C string",
-	           std::string_view{"hello from a C++ string"},
-	           52,
-	           0xabcdULL);
+	Debug::log(
+	  "Here is a C string {}, A C++ string view {}, "
+	  "an int {}, and an unsigned 64-bit value {}",
+	  "hello from a C string",
+	  std::string_view{"hello from a C++ string"},
+	  52,
+	  0xabcdULL);
 	auto enumValue = NetworkAddress::AddressKindIPv4;
 	Debug::log("Here is an enum value: {}", enumValue);
 	int x;

@@ -26,7 +26,7 @@ void print_capability(void *ptr)
 }
 
 // point_definition#begin
-struct  Point
+struct Point
 {
 	int x, y;
 };
@@ -40,7 +40,7 @@ struct IntrusiveLinkedList
 
 struct PointList
 {
-	Point point;
+	Point                                              point;
 	[[cheri::no_subobject_bounds]] IntrusiveLinkedList list;
 };
 // point_list#end

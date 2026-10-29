@@ -40,7 +40,8 @@ DECLARE_AND_DEFINE_ALLOCATOR_CAPABILITY(mqttTestMalloc,
 
 constexpr std::string_view testTopic{
   "cheriot-book-example"};
-constexpr std::string_view testPayload{"Cheriots of fire!"};
+constexpr std::string_view testPayload{
+  "Cheriots of fire!"};
 
 static int ackReceived     = 0;
 static int publishReceived = 0;
@@ -56,7 +57,7 @@ publishCallback(const char *topicName,
 	  "Got a PUBLISH for topic {}: {}",
 	  std::string_view{topicName, topicNameLength},
 	  std::string_view{static_cast<const char *>(payload),
-	                   payloadLength});
+		                 payloadLength});
 	publishReceived++;
 }
 // publish_callback#end
@@ -68,8 +69,8 @@ void __cheriot_callback ackCallback(uint16_t packetID,
 	Debug::log("Got an ACK for packet {}", packetID);
 	if (isReject)
 	{
-		Debug::log(
-		  "However the ACK is a SUBSCRIBE REJECT notification");
+		Debug::log("However the ACK is a SUBSCRIBE REJECT "
+		           "notification");
 	}
 	ackReceived++;
 }
@@ -109,17 +110,17 @@ void __cheriot_compartment("mqtt_example") example()
 	Debug::log("Connecting to MQTT broker...");
 	auto handle =
 	  mqtt_connect(&t,
-	               STATIC_SEALED_VALUE(mqttTestMalloc),
-	               CONNECTION_CAPABILITY(MosquittoOrgMQTT),
-	               publishCallback,
-	               ackCallback,
-	               TAs,
-	               TAs_NUM,
-	               networkBufferSize,
-	               incomingPublishCount,
-	               outgoingPublishCount,
-	               clientID.data(),
-	               clientID.size());
+		             STATIC_SEALED_VALUE(mqttTestMalloc),
+		             CONNECTION_CAPABILITY(MosquittoOrgMQTT),
+		             publishCallback,
+		             ackCallback,
+		             TAs,
+		             TAs_NUM,
+		             networkBufferSize,
+		             incomingPublishCount,
+		             outgoingPublishCount,
+		             clientID.data(),
+		             clientID.size());
 
 	if (!Capability{handle}.is_valid())
 	{
@@ -133,11 +134,12 @@ void __cheriot_compartment("mqtt_example") example()
 	Debug::log("Subscribing to test topic '{}'.", testTopic);
 
 	// subscribe#begin
-	ret = mqtt_subscribe(&t,
-	                     handle,
-	                     1, // QoS 1 = delivered at least once
-	                     testTopic.data(),
-	                     testTopic.size());
+	ret =
+	  mqtt_subscribe(&t,
+		               handle,
+		               1, // QoS 1 = delivered at least once
+		               testTopic.data(),
+		               testTopic.size());
 	Debug::Assert(
 	  ret >= 0, "Failed to subscribe, error {}.", ret);
 	// subscribe#end
@@ -195,10 +197,10 @@ void __cheriot_compartment("mqtt_example") example()
 	t = Timeout{MS_TO_TICKS(5000)};
 	ret =
 	  mqtt_unsubscribe(&t,
-	                   handle,
-	                   1, // QoS 1 = delivered at least once
-	                   testTopic.data(),
-	                   testTopic.size());
+		                 handle,
+		                 1, // QoS 1 = delivered at least once
+		                 testTopic.data(),
+		                 testTopic.size());
 
 	if (ret < 0)
 	{

@@ -39,14 +39,14 @@ void set_queue(CHERI_SEALED(MessageQueue *) newQueue)
  */
 void __cheriot_compartment("consumer") run()
 {
-	// Use the queue pointer as a futex.  It is initialised to
-	// 0, if the other thread has stored a valid pointer here
-	// then it will not be zero and so futex_wait will return
-	// immediately.
+	// Use the queue pointer as a futex.  It is initialised
+	// to 0, if the other thread has stored a valid pointer
+	// here then it will not be zero and so futex_wait will
+	// return immediately.
 	futex_wait(reinterpret_cast<uint32_t *>(&queue), 0);
 	Debug::log("Waiting for messages");
-	// Get a message from the queue and print it.  This blocks
-	// indefinitely.
+	// Get a message from the queue and print it.  This
+	// blocks indefinitely.
 	int value = 0;
 	while ((value != 199) &&
 	       (blocking_forever<queue_receive_sealed>(

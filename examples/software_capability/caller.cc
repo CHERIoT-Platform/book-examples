@@ -28,11 +28,13 @@ void __cheriot_compartment("caller") entry()
 	// Try the invalid ones
 	printf("Invalid counter increment returned %lld\n",
 	       monotonic_counter_increment(invalidCounter));
-	printf("Invalid counter increment returned %lld\n",
-	       monotonic_counter_increment(invalidSealedCounter));
+	printf(
+	  "Invalid counter increment returned %lld\n",
+	  monotonic_counter_increment(invalidSealedCounter));
 	// Try manipulating the counter directly
 	auto underlyingCounter =
-	  reinterpret_cast<MonotonicCounterState *>(validCounter);
+	  reinterpret_cast<MonotonicCounterState *>(
+	    validCounter);
 	(*underlyingCounter)++;
 }
 // entry#end

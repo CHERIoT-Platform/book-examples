@@ -28,10 +28,10 @@ void __cheriot_compartment("tcp_example") example()
 	Debug::log("Creating connection");
 	// connect#begin
 	Timeout unlimited{UnlimitedTimeout};
-	auto    socket =
-	  network_socket_connect_tcp(&unlimited,
-	                             MALLOC_CAPABILITY,
-	                             STATIC_SEALED_VALUE(Server));
+	auto    socket = network_socket_connect_tcp(
+	  &unlimited,
+	  MALLOC_CAPABILITY,
+	  STATIC_SEALED_VALUE(Server));
 	if (!CHERI::Capability{socket}.is_valid())
 	{
 		Debug::log("Failed to connect");

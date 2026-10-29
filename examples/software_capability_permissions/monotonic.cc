@@ -15,8 +15,8 @@ namespace
 	bool check_permissions(MonotonicCounter counter,
 	                       int              permissions)
 	{
-		return (token_permissions_get(counter) & permissions) ==
-		       permissions;
+		return (token_permissions_get(counter) &
+		        permissions) == permissions;
 	}
 	// check_permissions#end
 } // namespace

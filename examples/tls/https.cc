@@ -16,10 +16,11 @@
 using Debug = ConditionalDebug<true, "HTTPS Client">;
 constexpr bool UseIPv6 = CHERIOT_RTOS_OPTION_IPv6;
 
-DECLARE_AND_DEFINE_CONNECTION_CAPABILITY(ExampleComTLS,
-                                         "example.com",
-                                         443,
-                                         ConnectionTypeTCP);
+DECLARE_AND_DEFINE_CONNECTION_CAPABILITY(
+  ExampleComTLS,
+  "example.com",
+  443,
+  ConnectionTypeTCP);
 
 DECLARE_AND_DEFINE_ALLOCATOR_CAPABILITY(TestMalloc,
                                         32 * 1024);
@@ -72,10 +73,10 @@ void __cheriot_compartment("https_example") example()
 
 		ssize_t sentThisCall =
 		  tls_connection_send(&unlimited,
-		                      tlsSocket,
-		                      &(message[sent]),
-		                      remaining,
-		                      0);
+			                    tlsSocket,
+			                    &(message[sent]),
+			                    remaining,
+			                    0);
 		Debug::log("Sent {} bytes", sentThisCall);
 
 		if (sentThisCall >= 0)
@@ -111,8 +112,8 @@ void __cheriot_compartment("https_example") example()
 			{
 				Debug::log(
 				  "Looking for Content-Length in:\n{}",
-				  std::string_view(reinterpret_cast<char *>(buffer),
-				                   received));
+				  std::string_view(
+				    reinterpret_cast<char *>(buffer), received));
 				static const char Header[] = "Content-Length: ";
 				auto *strBuffer = reinterpret_cast<char *>(buffer);
 				if (char *headerStart =
@@ -130,8 +131,8 @@ void __cheriot_compartment("https_example") example()
 					Debug::log("Content length: {}", contentLength);
 					char *headerEnd =
 					  strnstr(headerStart,
-					          "\r\n",
-					          received - (headerStart - strBuffer));
+						        "\r\n",
+						        received - (headerStart - strBuffer));
 					if (headerEnd != nullptr)
 					{
 						// Skip the initial header
@@ -155,7 +156,7 @@ void __cheriot_compartment("https_example") example()
 			Debug::log(
 			  "Received:\n{}",
 			  std::string_view(reinterpret_cast<char *>(buffer),
-			                   received));
+				                 received));
 			contentLength -= received;
 			int ret = heap_free(TEST_MALLOC, buffer);
 			if (ret != 0)

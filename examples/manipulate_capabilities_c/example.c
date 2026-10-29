@@ -42,7 +42,8 @@ __cheriot_compartment("example") int entry(void)
 	char *bounded = cheri_bounds_set(heapBuffer, 23);
 	print_capability(bounded);
 	// Removing permissions from a heap capability
-	bounded = cheri_permissions_and(bounded, CHERI_PERM_LOAD);
+	bounded =
+	  cheri_permissions_and(bounded, CHERI_PERM_LOAD);
 	print_capability(bounded);
 	print_capability(heapBuffer);
 	// capability_manipulation#end

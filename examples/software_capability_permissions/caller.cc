@@ -26,9 +26,10 @@ void __cheriot_compartment("caller") entry()
 	printf("Counter increment with omnipotent capability "
 	       "returned %lld\n",
 	       monotonic_counter_increment(omnipotentCounter));
-	printf("Counter increment with increment-only capability "
-	       "returned %lld\n",
-	       monotonic_counter_increment(incrementOnlyCounter));
+	printf(
+	  "Counter increment with increment-only capability "
+	  "returned %lld\n",
+	  monotonic_counter_increment(incrementOnlyCounter));
 	printf("Counter increment with read-only capability "
 	       "returned %lld\n",
 	       monotonic_counter_increment(readOnlyCounter));

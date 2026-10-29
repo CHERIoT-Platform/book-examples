@@ -8,27 +8,27 @@ void print_capability(CHERI::Capability<void> ptr)
 	using P                          = CHERI::Permission;
 	ptraddr_t            address     = ptr.address();
 	CHERI::PermissionSet permissions = ptr.permissions();
-	printf("0x%x (valid:%d length: 0x%x 0x%x-0x%x otype:%d "
-	       "permissions: %c "
-	       "%c%c%c%c%c%c %c%c %c%c%c)\n",
-	       address,
-	       ptr.is_valid(),
-	       ptr.length(),
-	       ptr.base(),
-	       ptr.top(),
-	       ptr.type(),
-	       (permissions.contains(P::Global)) ? 'G' : '-',
-	       (permissions.contains(P::Load)) ? 'R' : '-',
-	       (permissions.contains(P::Store)) ? 'W' : '-',
-	       (permissions.contains(P::LoadStoreCapability))
-	         ? 'c'
-	         : '-',
-	       (permissions.contains(P::LoadGlobal)) ? 'g' : '-',
-	       (permissions.contains(P::LoadMutable)) ? 'm' : '-',
-	       (permissions.contains(P::StoreLocal)) ? 'l' : '-',
-	       (permissions.contains(P::Seal)) ? 'S' : '-',
-	       (permissions.contains(P::Unseal)) ? 'U' : '-',
-	       (permissions.contains(P::Global)) ? '0' : '-');
+	printf(
+	  "0x%x (valid:%d length: 0x%x 0x%x-0x%x otype:%d "
+	  "permissions: %c "
+	  "%c%c%c%c%c%c %c%c %c%c%c)\n",
+	  address,
+	  ptr.is_valid(),
+	  ptr.length(),
+	  ptr.base(),
+	  ptr.top(),
+	  ptr.type(),
+	  (permissions.contains(P::Global)) ? 'G' : '-',
+	  (permissions.contains(P::Load)) ? 'R' : '-',
+	  (permissions.contains(P::Store)) ? 'W' : '-',
+	  (permissions.contains(P::LoadStoreCapability)) ? 'c'
+		                                               : '-',
+	  (permissions.contains(P::LoadGlobal)) ? 'g' : '-',
+	  (permissions.contains(P::LoadMutable)) ? 'm' : '-',
+	  (permissions.contains(P::StoreLocal)) ? 'l' : '-',
+	  (permissions.contains(P::Seal)) ? 'S' : '-',
+	  (permissions.contains(P::Unseal)) ? 'U' : '-',
+	  (permissions.contains(P::Global)) ? '0' : '-');
 }
 // print_capability#end
 

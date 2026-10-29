@@ -7,9 +7,13 @@
 
 using MonotonicCounterState = std::atomic<int64_t>;
 
-#define DECLARE_AND_DEFINE_COUNTER(name)                   \
-	DECLARE_AND_DEFINE_STATIC_SEALED_VALUE(                  \
-	  MonotonicCounterState, monotonic, CounterKey, name, 0)
+#define DECLARE_AND_DEFINE_COUNTER(name)                  \
+	DECLARE_AND_DEFINE_STATIC_SEALED_VALUE(                 \
+	  MonotonicCounterState,                                \
+	  monotonic,                                            \
+	  CounterKey,                                           \
+	  name,                                                 \
+	  0)
 
 typedef MonotonicCounterState
   *__sealed_capability MonotonicCounter;
@@ -20,16 +24,16 @@ typedef MonotonicCounterState
  */
 enum [[clang::flag_enum]] MonotonicCounterPermissions
 {
-	CounterPermitRead = (1 << 0),
+	CounterPermitRead      = (1 << 0),
 	CounterPermitIncrement = (1 << 1),
 };
 
 /**
  * Helper that returns a copy of `counter` with the subset
- * of permissions that are both already present in `counter`
- * and enumerated in `permissionsMask`. The permission mask
- * should be constructed by bitwise anding values from
- * `MonotonicCounterPermissions`.
+ * of permissions that are both already present in
+ * `counter` and enumerated in `permissionsMask`. The
+ * permission mask should be constructed by bitwise anding
+ * values from `MonotonicCounterPermissions`.
  */
 static inline MonotonicCounter
 monotonic_counter_permissions_and(MonotonicCounter counter,
@@ -40,10 +44,11 @@ monotonic_counter_permissions_and(MonotonicCounter counter,
 // permissions#end
 
 /**
- * Increments a monotonic counter and returns the new value.
- * This requires `CounterPermitIncrement` to increment.  If
- * `counter` does not have `CounterPermitRead` permission
- * then this will return 0 to indicate successful increment.
+ * Increments a monotonic counter and returns the new
+ * value. This requires `CounterPermitIncrement` to
+ * increment.  If `counter` does not have
+ * `CounterPermitRead` permission then this will return 0
+ * to indicate successful increment.
  *
  * Returns a negative value for errors.
  */

@@ -33,7 +33,8 @@ void __cheriot_compartment("queue") producer()
 		Debug::log("Producer sending {} to queue", i);
 		int ret = blocking_forever<queue_send>(queue, &i);
 		// Abort if the queue send errors.
-		Debug::Invariant(ret == 0, "Queue send failed {}", ret);
+		Debug::Invariant(
+		  ret == 0, "Queue send failed {}", ret);
 	}
 	// queue_send#end
 	Debug::log("Producer sent all messages to consumer");
@@ -45,16 +46,17 @@ void __cheriot_compartment("queue") producer()
 void __cheriot_compartment("queue") consumer()
 {
 	// consumer#begin
-	// Use the queue pointer as a futex.  It is initialised to
-	// 0, if the other thread has stored a valid pointer here
-	// then it will not be zero and so futex_wait will return
-	// immediately.
+	// Use the queue pointer as a futex.  It is initialised
+	// to 0, if the other thread has stored a valid pointer
+	// here then it will not be zero and so futex_wait will
+	// return immediately.
 	futex_wait(reinterpret_cast<uint32_t *>(&queue), 0);
 	Debug::log("Waiting for messages");
 	// Get a message from the queue and print it.
 	int value = 0;
-	while ((value != 199) && (blocking_forever<queue_receive>(
-	                            queue, &value) == 0))
+	while (
+	  (value != 199) &&
+	  (blocking_forever<queue_receive>(queue, &value) == 0))
 	{
 		Debug::log("Read {} from queue", value);
 	}

@@ -33,7 +33,8 @@ void __cheriot_compartment("producer") run()
 		int ret =
 		  blocking_forever<queue_send_sealed>(queue, &i);
 		// Abort if the queue send errors.
-		Debug::Invariant(ret == 0, "Queue send failed {}", ret);
+		Debug::Invariant(
+		  ret == 0, "Queue send failed {}", ret);
 	}
 	Debug::log("Producer sent all messages to consumer");
 

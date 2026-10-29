@@ -33,7 +33,8 @@ void init()
  */
 void send(int number)
 {
-	Debug::log("Starting producer loop for queue {}", number);
+	Debug::log("Starting producer loop for queue {}",
+	           number);
 	// queue_send#begin
 	// Loop, sending some numbers to the other thread.
 	for (int i = 1; i < 200; i++)
@@ -112,7 +113,8 @@ void __cheriot_compartment("queue") consumer()
 				  ret == 0,
 				  "Failed to receive message from queue: {}",
 				  ret);
-				Debug::log("Received {} on queue {}", values[i], i);
+				Debug::log(
+				  "Received {} on queue {}", values[i], i);
 			}
 		}
 		// multiwaiter_use#end

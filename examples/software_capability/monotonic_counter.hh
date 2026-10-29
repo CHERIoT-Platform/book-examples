@@ -7,15 +7,20 @@
 // export#begin
 using MonotonicCounterState = std::atomic<int64_t>;
 
-#define DECLARE_AND_DEFINE_COUNTER(name)                   \
-	DECLARE_AND_DEFINE_STATIC_SEALED_VALUE(                  \
-	  MonotonicCounterState, monotonic, CounterKey, name, 0)
+#define DECLARE_AND_DEFINE_COUNTER(name)                  \
+	DECLARE_AND_DEFINE_STATIC_SEALED_VALUE(                 \
+	  MonotonicCounterState,                                \
+	  monotonic,                                            \
+	  CounterKey,                                           \
+	  name,                                                 \
+	  0)
 
 typedef MonotonicCounterState
   *__sealed_capability MonotonicCounter;
 
 /**
- * Increments a monotonic counter and returns the new value.
+ * Increments a monotonic counter and returns the new
+ * value.
  *
  * Returns a negative value for errors.
  */
